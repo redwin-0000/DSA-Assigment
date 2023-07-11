@@ -1,0 +1,311 @@
+#################################################################################
+Question 1
+
+Given an array arr[ ] of size N having elements, the task is to find the next greater element for each element of the array in order of their appearance in the array.Next greater element of an element in the array is the nearest element on the right which is greater than the current element.If there does not exist next greater of current element, then next greater element for current element is -1. For example, next greater of the last element is always -1.
+
+Answer
+
+function nextGreaterElement(arr) {
+  const stack = [];
+  const result = new Array(arr.length).fill(-1);
+
+  for (let i = 0; i < arr.length; i++) {
+    while (stack.length > 0 && arr[i] > arr[stack[stack.length - 1]]) {
+      const index = stack.pop();
+      result[index] = arr[i];
+    }
+    stack.push(i);
+  }
+
+  return result;
+}
+#################################################################################
+#################################################################################
+Question 2
+
+Given an array **a** of integers of length **n**, find the nearest smaller number for every element such that the smaller element is on left side.If no small element present on the left print -1.
+
+Answer 2
+
+function nextGreaterElement(arr) {
+  const stack = [];
+  const result = new Array(arr.length).fill(-1);
+
+  for (let i = 0; i < arr.length; i++) {
+    while (stack.length > 0 && arr[i] > arr[stack[stack.length - 1]]) {
+      const index = stack.pop();
+      result[index] = arr[i];
+    }
+    stack.push(i);
+  }
+
+  return result;
+}
+
+#################################################################################
+#################################################################################
+
+Question 3
+Implement a Stack using two queues q1 and q2.
+
+Answer 3
+
+class Stack {
+  constructor() {
+    this.q1 = [];
+    this.q2 = [];
+  }
+
+  push(element) {
+    while (this.q1.length > 0) {
+      this.q2.push(this.q1.shift());
+    }
+    this.q1.push(element);
+    while (this.q2.length > 0) {
+      this.q1.push(this.q2.shift());
+    }
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.q1.shift();
+  }
+
+  top() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.q1[0];
+  }
+
+  isEmpty() {
+    return this.q1.length === 0;
+  }
+}
+
+
+#################################################################################
+#################################################################################
+Question 3
+Implement a Stack using two queues q1 and q2.
+
+Answer 3
+
+class Stack {
+  constructor() {
+    this.q1 = [];
+    this.q2 = [];
+  }
+
+  push(element) {
+    while (this.q1.length > 0) {
+      this.q2.push(this.q1.shift());
+    }
+    this.q1.push(element);
+    while (this.q2.length > 0) {
+      this.q1.push(this.q2.shift());
+    }
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.q1.shift();
+  }
+
+  top() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.q1[0];
+  }
+
+  isEmpty() {
+    return this.q1.length === 0;
+  }
+}
+#################################################################################
+#################################################################################
+
+Question 4
+
+You are given a stack St. You have to reverse the stack using recursion.
+
+Answer 4
+function reverseStack(stack) {
+  if (stack.length === 0) {
+    return;
+  }
+
+  const item = stack.pop();
+  reverseStack(stack);
+  insertAtBottom(stack, item);
+}
+
+function insertAtBottom(stack, item) {
+  if (stack.length === 0) {
+    stack.push(item);
+    return;
+  }
+
+  const temp = stack.pop();
+  insertAtBottom(stack, item);
+  stack.push(temp);
+}
+
+
+#################################################################################
+#################################################################################
+
+Question 5
+You are given a string S, the task is to reverse the string using stack.
+
+Answer 5
+function reverseString(str) {
+  const stack = [];
+  let reversedStr = '';
+
+  for (let i = 0; i < str.length; i++) {
+    stack.push(str[i]);
+  }
+
+  while (stack.length > 0) {
+    reversedStr += stack.pop();
+  }
+
+  return reversedStr;
+}
+
+
+#################################################################################
+#################################################################################
+Question 6
+Given string S representing a postfix expression, the task is to evaluate the expression and find the final value. Operators will only include the basic arithmetic operators like *, /, + and -.
+
+Answer 6
+
+function evaluatePostfixExpression(expression) {
+  const stack = [];
+
+  for (let i = 0; i < expression.length; i++) {
+    const char = expression[i];
+
+    if (isNumeric(char)) {
+      stack.push(Number(char));
+    } else {
+      const operand2 = stack.pop();
+      const operand1 = stack.pop();
+      const result = performOperation(char, operand1, operand2);
+      stack.push(result);
+    }
+  }
+
+  return stack.pop();
+}
+
+function isNumeric(char) {
+  return !isNaN(char);
+}
+
+function performOperation(operator, operand1, operand2) {
+  switch (operator) {
+    case '+':
+      return operand1 + operand2;
+    case '-':
+      return operand1 - operand2;
+    case '*':
+      return operand1 * operand2;
+    case '/':
+      return operand1 / operand2;
+  }
+}
+
+
+#################################################################################
+#################################################################################
+Question 7
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+Implement the `MinStack` class:
+
+- `MinStack()` initializes the stack object.
+- `void push(int val)` pushes the element `val` onto the stack.
+- `void pop()` removes the element on the top of the stack.
+- `int top()` gets the top element of the stack.
+- `int getMin()` retrieves the minimum element in the stack.
+
+You must implement a solution with `O(1)` time complexity for each function.
+
+Answer 7
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+    this.minStack = [];
+  }
+
+  push(val) {
+    this.stack.push(val);
+    if (this.minStack.length === 0 || val <= this.getMin()) {
+      this.minStack.push(val);
+    }
+  }
+
+  pop() {
+    const val = this.stack.pop();
+    if (val === this.getMin()) {
+      this.minStack.pop();
+    }
+  }
+
+  top() {
+    return this.stack[this.stack.length - 1];
+  }
+
+  getMin() {
+    return this.minStack[this.minStack.length - 1];
+  }
+}
+
+
+#################################################################################
+#################################################################################
+Question 8
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+Answer 8
+function trap(height) {
+  const n = height.length;
+  let left = 0;
+  let right = n - 1;
+  let leftMax = 0;
+  let rightMax = 0;
+  let water = 0;
+
+  while (left < right) {
+    if (height[left] <= height[right]) {
+      if (height[left] >= leftMax) {
+        leftMax = height[left];
+      } else {
+        water += leftMax - height[left];
+      }
+      left++;
+    } else {
+      if (height[right] >= rightMax) {
+        rightMax = height[right];
+      } else {
+        water += rightMax - height[right];
+      }
+      right--;
+    }
+  }
+
+  return water;
+}
+
+
+#################################################################################

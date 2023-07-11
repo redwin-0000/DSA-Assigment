@@ -1,0 +1,189 @@
+#################################################################################
+Question 1
+
+Given a Binary Tree (Bt), convert it to a Doubly Linked List(DLL). The left and right pointers in nodes are to be used as previous and next pointers respectively in converted DLL. The order of nodes in DLL must be the same as in Inorder for the given Binary Tree. The first node of Inorder traversal (leftmost node in BT) must be the head node of the DLL.
+
+Answer 1
+function convertBinaryTreeToDLLInorder(root) {
+  let head = null;
+  let prev = null;
+
+  function _convert(node) {
+    if (!node) {
+      return;
+    }
+
+    _convert(node.left);
+
+    if (!head) {
+      head = node;
+    } else {
+      prev.right = node;
+      node.left = prev;
+    }
+    prev = node;
+
+    _convert(node.right);
+  }
+
+  _convert(root);
+  head.left = prev;
+  prev.right = head;
+  return head;
+}
+
+#################################################################################
+#################################################################################
+Question 2
+A Given a binary tree, the task is to flip the binary tree towards the right direction that is clockwise. See the below examples to see the transformation.
+
+In the flip operation, the leftmost node becomes the root of the flipped tree and its parent becomes its right child and the right sibling becomes its left child and the same should be done for all left most nodes recursively.
+
+
+
+Answer 2
+function flipBinaryTree(root) {
+  if (!root) {
+    return null;
+  }
+
+  const left = root.left;
+  const right = root.right;
+
+  root.left = right;
+  root.right = left;
+
+  flipBinaryTree(left);
+  flipBinaryTree(right);
+
+  return root;
+}
+
+#################################################################################
+#################################################################################
+
+Question 3
+Given a binary tree, print all its root-to-leaf paths without using recursion. For example, consider the following Binary Tree.
+
+Input:
+
+        6
+     /    \
+    3      5
+  /   \     \
+ 2     5     4
+     /   \
+    7     4
+
+Output:
+
+There are 4 leaves, hence 4 root to leaf paths -
+  6->3->2
+  6->3->5->7
+  6->3->5->4
+  6->5>4
+
+Answer 3
+function printRootToLeafPaths(root) {
+  const queue = [];
+  queue.push([root]);
+
+  while (queue.length) {
+    const path = queue.shift();
+    const node = path[path.length - 1];
+
+    if (!node.left && !node.right) {
+      console.log(path.join("->"));
+    } else {
+      if (node.left) {
+        queue.push([...path, node.left]);
+      }
+
+      if (node.right) {
+        queue.push([...path, node.right]);
+      }
+    }
+  }
+}
+
+#################################################################################
+#################################################################################
+Question 4
+Given Preorder, Inorder and Postorder traversals of some tree. Write a program to check if they all are of the same tree.
+
+**Examples:**
+
+Input : 
+
+        Inorder -> 4 2 5 1 3
+        Preorder -> 1 2 4 5 3
+        Postorder -> 4 5 2 3 1
+Output : 
+
+Yes
+Explanation : 
+
+All of the above three traversals are of
+the same tree 
+
+                           1
+                         /   \
+                        2     3
+                      /   \
+                     4     5
+
+Input : 
+
+        Inorder -> 4 2 5 1 3
+        Preorder -> 1 5 4 2 3
+        Postorder -> 4 1 2 3 5
+Output : 
+
+No
+
+Answer 4
+
+function checkIfSameTree(preorder, inorder, postorder) {
+  const root = buildTree(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
+  const inorderTraversal = inorderTraverse(root);
+  const postorderTraversal = postorderTraverse(root);
+
+  return inorderTraversal === inorder && postorderTraversal === postorder;
+}
+
+function buildTree(preorder, inorder, preorderStart, preorderEnd, inorderStart, inorderEnd) {
+  if (preorderStart > preorderEnd) {
+    return null;
+  }
+
+  const rootValue = preorder[preorderStart];
+  const rootIndex = inorder.indexOf(rootValue);
+
+  const leftChild = buildTree(preorder, inorder, preorderStart + 1, preorderStart + rootIndex - inorderStart, inorderStart, rootIndex - 1);
+  const rightChild = buildTree(preorder, inorder, preorderStart + rootIndex - inorderStart + 1, preorderEnd, rootIndex + 1, inorderEnd);
+
+  return {
+    val: rootValue,
+    left: leftChild,
+    right: rightChild,
+  };
+}
+
+function inorderTraverse(root) {
+  if (!root) {
+    return [];
+  }
+
+  return [...inorderTraverse(root.left), root.val, ...inorderTraverse(root.right)];
+}
+
+function postorderTraverse(root) {
+  if (!root) {
+    return [];
+  }
+
+  return [...postorderTraverse(root.left), ...postorderTraverse(root.right), root.val];
+}
+
+
+#################################################################################

@@ -1,0 +1,267 @@
+Question:1
+
+Given an integer `n`, return *`true` if it is a power of three. Otherwise, return `false`*.
+
+An integer `n` is a power of three, if there exists an integer `x` such that `n == 3x`.
+
+
+
+///////////////
+Answer
+
+function isPowerOfThree(n) {
+  if (n <= 0) {
+    return false;
+  }
+
+  while (n % 3 === 0) {
+    n /= 3;
+  }
+
+  return n === 1;
+}
+
+console.log(isPowerOfThree(27));  // Output: true
+console.log(isPowerOfThree(0));  // Output: false
+console.log(isPowerOfThree(-1));  // Output: false
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:2
+
+You have a list `arr` of all integers in the range `[1, n]` sorted in a strictly increasing order. Apply the following algorithm on `arr`:
+
+- Starting from left to right, remove the first number and every other number afterward until you reach the end of the list.
+- Repeat the previous step again, but this time from right to left, remove the rightmost number and every other number from the remaining numbers.
+- Keep repeating the steps again, alternating left to right and right to left, until a single number remains.
+
+Given the integer `n`, return *the last number that remains in* `arr`.
+
+
+
+///////////////
+Answer
+
+
+function lastRemaining(n) {
+  let leftToRight = true;
+  let remaining = n;
+  let step = 1;
+  let head = 1;
+
+  while (remaining > 1) {
+    if (leftToRight || remaining % 2 === 1) {
+      head += step;
+    }
+    remaining = Math.floor(remaining / 2);
+    step *= 2;
+    leftToRight = !leftToRight;
+  }
+
+  return head;
+}
+
+console.log(lastRemaining(9));  // Output: 6
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:3
+
+
+Given a set represented as a string, write a recursive code to print all subsets of it. The subsets can be printed in any order.
+
+
+///////////////
+Answer
+
+
+function printAllSubsets(set, subset = '', index = 0) {
+  if (index === set.length) {
+    console.log(subset);
+    return;
+  }
+
+  // Recursive call without including the current character
+  printAllSubsets(set, subset, index + 1);
+
+  // Recursive call including the current character
+  printAllSubsets(set, subset + set[index], index + 1);
+}
+
+var input1 = "abc";
+var input2 = "abcd";
+
+printAllSubsets(input1);
+console.log('-----');
+printAllSubsets(input2);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:4
+
+
+Given a string calculate length of the string using recursion.
+
+
+///////////////
+Answer
+
+function calculateLength(str) {
+  if (str === '') {
+    return 0;
+  }
+
+  return 1 + calculateLength(str.slice(1));
+}
+
+var input1 = "abcd";
+var input2 = "GEEKSFORGEEKS";
+
+console.log(calculateLength(input1));  // Output: 4
+console.log(calculateLength(input2));  // Output: 13
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:5
+
+We are given a string S, we need to find count of all contiguous substrings starting and ending with same character.
+
+
+
+///////////////
+Answer
+
+
+function countSubstringsWithSameEnds(S) {
+  var count = 0;
+
+  for (var i = 0; i < S.length; i++) {
+    // Every individual character is a valid substring
+    count++;
+
+    var j = i - 1;
+    var k = i + 1;
+
+    // Expand from the current character to find substrings
+    while (j >= 0 && k < S.length && S[j] === S[k]) {
+      count++;
+      j--;
+      k++;
+    }
+  }
+
+  return count;
+}
+
+var input1 = "abcab";
+var input2 = "aba";
+
+console.log(countSubstringsWithSameEnds(input1));  // Output: 7
+console.log(countSubstringsWithSameEnds(input2));  // Output: 4
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:6
+The tower of Hanoi is a famous puzzle where we have three rods and N disks. The objective of the puzzle is to move the entire stack to another rod. You are given the number of discs N. Initially, these discs are in the rod 1. You need to print all the steps of discs movement so that all the discs reach the 3rd rod. Also, you need to find the total moves.Note: The discs are arranged such that the top disc is numbered 1 and the bottom-most disc is numbered N. Also, all the discs have different sizes and a bigger disc cannot be put on the top of a smaller disc. Refer the provided link to get a better clarity about the puzzle.
+
+
+
+///////////////
+Answer
+
+function towerOfHanoi(n, source, destination, auxiliary) {
+  if (n === 1) {
+    console.log(`move disk 1 from rod ${source} to rod ${destination}`);
+    return 1;
+  }
+
+  const move1 = towerOfHanoi(n - 1, source, auxiliary, destination);
+  console.log(`move disk ${n} from rod ${source} to rod ${destination}`);
+  const move2 = towerOfHanoi(n - 1, auxiliary, destination, source);
+
+  return 1 + move1 + move2;
+}
+
+// Example 1
+const N1 = 2;
+console.log(`Total moves: ${towerOfHanoi(N1, 1, 3, 2)}`);
+
+// Example 2
+const N2 = 3;
+console.log(`Total moves: ${towerOfHanoi(N2, 1, 3, 2)}`);
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:7
+
+
+Given a string str, the task is to print all the permutations of str. A permutation is an arrangement of all or part of a set of objects, with regard to the order of the arrangement. For instance, the words ‘bat’ and ‘tab’ represents two distinct permutation (or arrangements) of a similar three letter word.
+
+
+///////////////
+Answer
+
+function getPermutations(str) {
+  var permutations = [];
+
+  function permute(currentPerm, remainingChars) {
+    if (remainingChars.length === 0) {
+      permutations.push(currentPerm);
+      return;
+    }
+
+    for (var i = 0; i < remainingChars.length; i++) {
+      var newPerm = currentPerm + remainingChars[i];
+      var newRemainingChars = remainingChars.slice(0, i) + remainingChars.slice(i + 1);
+      permute(newPerm, newRemainingChars);
+    }
+  }
+
+  permute("", str);
+  return permutations;
+}
+
+var input1 = "cd";
+var input2 = "abb";
+
+console.log(getPermutations(input1).join(" "));  // Output: cd dc
+console.log(getPermutations(input2).join(" "));  // Output: abb abb bab bba bab bba
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question:8
+
+Given a string, count total number of consonants in it. A consonant is an English alphabet character that is not vowel (a, e, i, o and u). Examples of constants are b, c, d, f, and g.
+
+
+///////////////
+Answer
+
+
+function countConsonants(string) {
+  var consonants = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ';
+  var count = 0;
+  for (var i = 0; i < string.length; i++) {
+    if (consonants.includes(string[i])) {
+      count++;
+    }
+  }
+  return count;
+}
+
+console.log(countConsonants("abc de"));  // Output: 3
+console.log(countConsonants("geeksforgeeks portal"));  // Output: 12
+
+
+

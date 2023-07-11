@@ -1,0 +1,210 @@
+#################################################################################
+Question 1
+
+
+
+You are given a binary tree. The binary tree is represented using the TreeNode class. Each TreeNode has an integer value and left and right children, represented using the TreeNode class itself. Convert this binary tree into a binary search tree.
+
+Input:
+
+        10
+
+       /   \
+
+     2      7
+
+   /   \
+
+ 8      4
+
+Output:
+
+        8
+
+      /   \
+
+    4     10
+
+  /   \
+
+2      7
+
+
+Answer 1
+
+function convertBST(root) {
+  if (!root) {
+    return null;
+  }
+
+  const left = convertBST(root.left);
+  const right = convertBST(root.right);
+
+  if (left && left.val > root.val) {
+    const temp = root.val;
+    root.val = left.val;
+    left.val = temp;
+  }
+
+  if (right && right.val < root.val) {
+    const temp = root.val;
+    root.val = right.val;
+    right.val = temp;
+  }
+
+  return root;
+}
+#################################################################################
+#################################################################################
+Question 2
+
+
+Given a Binary Search Tree with all unique values and two keys. Find the distance between two nodes in BST. The given keys always exist in BST.
+
+Answer 2
+
+function findDistanceBetweenNodes(root, node1, node2) {
+  const path1 = [];
+  const path2 = [];
+
+  _findPath(root, node1, path1);
+  _findPath(root, node2, path2);
+
+  let i = 0;
+  let j = 0;
+  let distance = 0;
+  while (i < path1.length && j < path2.length) {
+    if (path1[i] !== path2[j]) {
+      distance++;
+    }
+    i++;
+    j++;
+  }
+
+  return distance;
+}
+
+function _findPath(root, node, path) {
+  if (!root) {
+    return;
+  }
+
+  if (root.val === node) {
+    path.push(root.val);
+    return;
+  }
+
+  _findPath(root.left, node, path);
+  _findPath(root.right, node, path);
+}
+
+#################################################################################
+#################################################################################
+Question 3
+
+
+Write a program to convert a binary tree to a doubly linked list.
+
+Input:
+
+        10
+
+       /   \
+
+     5     20
+
+           /   \
+
+        30     35
+
+Output:
+
+5 10 30 20 35
+
+
+Answer 3
+
+function convertBinaryTreeToDoublyLinkedList(root) {
+  let head = null;
+  let prev = null;
+
+  function _convert(node) {
+    if (!node) {
+      return;
+    }
+
+    _convert(node.left);
+
+    if (!head) {
+      head = node;
+    } else {
+      prev.right = node;
+      node.left = prev;
+    }
+    prev = node;
+
+    _convert(node.right);
+  }
+
+  _convert(root);
+  head.left = prev;
+  prev.right = head;
+  return head;
+}
+
+#################################################################################
+#################################################################################
+
+Question 4
+Write a program to connect nodes at the same level.
+
+Input:
+
+        1
+
+      /   \
+
+    2      3
+
+  /   \   /   \
+
+4     5 6    7
+
+Output:
+
+1 → -1
+
+2 → 3
+
+3 → -1
+
+4 → 5
+
+5 → 6
+
+6 → 7
+
+7 → -1
+
+Answer 4
+
+ function connectNodesAtSameLevel(root) {
+  let currentLevel = [root];
+  let nextLevel = [];
+
+  while (currentLevel.length) {
+    let node = currentLevel.shift();
+    node.next = currentLevel[0] || null;
+
+    if (node.left) {
+      nextLevel.push(node.left);
+    }
+    if (node.right) {
+      nextLevel.push(node.right);
+    }
+  }
+
+  return root;
+}
+#################################################################################
+#################################################################################

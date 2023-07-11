@@ -1,0 +1,224 @@
+#################################################################################
+Question 1
+You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order.
+
+*Merge all the linked-lists into one sorted linked-list and return it*
+
+Answer 1
+function mergeSortedLinkedLists(lists) {
+  const dummyHead = new ListNode(0);
+  let current = dummyHead;
+  for (const list of lists) {
+    while (list) {
+      const node = new ListNode(list.val);
+      current.next = node;
+      current = current.next;
+      list = list.next;
+    }
+  }
+
+  return dummyHead.next;
+}
+#################################################################################
+#################################################################################
+Question 2
+Given an integer array nums, return an integer array counts where counts[i] is the number of smaller elements to the right of nums[i]
+
+Answer 2
+function smallerNumbersAfter(nums) {
+  const counts = new Array(nums.length);
+  for (let i = nums.length - 1; i >= 0; i--) {
+    let count = 0;
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] > nums[j]) {
+        count++;
+      }
+    }
+    counts[i] = count;
+  }
+
+  return counts;
+}
+
+#################################################################################
+#################################################################################
+Question 3
+Given an array of integers `nums`, sort the array in ascending order and return it.
+
+You must solve the problem **without using any built-in** functions in `O(nlog(n))` time complexity and with the smallest space complexity possible.
+
+Answer 3
+function sort(nums) {
+  const mergeSort = (nums, low, high) => {
+    if (low < high) {
+      const mid = Math.floor((low + high) / 2);
+      mergeSort(nums, low, mid);
+      mergeSort(nums, mid + 1, high);
+      merge(nums, low, mid, high);
+    }
+  };
+
+  const merge = (nums, low, mid, high) => {
+    const left = nums.slice(low, mid + 1);
+    const right = nums.slice(mid + 1, high + 1);
+    let i = 0;
+    let j = 0;
+    let k = low;
+    while (i < left.length && j < right.length) {
+      if (left[i] <= right[j]) {
+        nums[k] = left[i];
+        i++;
+      } else {
+        nums[k] = right[j];
+        j++;
+      }
+      k++;
+    }
+
+    while (i < left.length) {
+      nums[k] = left[i];
+      i++;
+      k++;
+    }
+
+    while (j < right.length) {
+      nums[k] = right[j];
+      j++;
+      k++;
+    }
+  };
+
+  mergeSort(nums, 0, nums.length - 1);
+  return nums;
+}
+
+#################################################################################
+#################################################################################
+Question 4
+Given an array of random numbers, Push all the zero’s of a given array to the end of the array. For example, if the given arrays is {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}, it should be changed to {1, 9, 8, 4, 2, 7, 6, 0, 0, 0, 0}. The order of all other elements should be same. Expected time complexity is O(n) and extra space is O(1)
+
+Answer 4
+
+function pushZerosToEnd(nums) {
+  let nonZeroCount = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[nonZeroCount] = nums[i];
+      nonZeroCount++;
+    }
+  }
+
+  for (let i = nonZeroCount; i < nums.length; i++) {
+    nums[i] = 0;
+  }
+}
+
+#################################################################################
+#################################################################################
+Question 5
+💡 **Rearrange array in alternating positive & negative items with O(1) extra space**
+
+Given an **array of positive** and **negative numbers**, arrange them in an **alternate** fashion such that every positive number is followed by a negative and vice-versa maintaining the **order of appearance**. The number of positive and negative numbers need not be equal. If there are more positive numbers they appear at the end of the array. If there are more negative numbers, they too appear at the end of the array.
+
+Answer 5
+
+function alternatePositiveNegative(nums) {
+  let i = 0;
+  let j = 1;
+  while (i < nums.length && j < nums.length) {
+    if (nums[i] > 0 && nums[j] < 0) {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+      i++;
+      j++;
+    } else if (nums[i] < 0 && nums[j] > 0) {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+      i++;
+      j++;
+    } else {
+      i++;
+    }
+  }
+}
+
+#################################################################################
+#################################################################################
+Question 6
+Given two sorted arrays, the task is to merge them in a sorted manner.
+
+Answer 6
+
+function mergeSortedArrays(nums1, nums2) {
+  let merged = [];
+  let i = 0;
+  let j = 0;
+  while (i < nums1.length && j < nums2.length) {
+    if (nums1[i] <= nums2[j]) {
+      merged.push(nums1[i]);
+      i++;
+    } else {
+      merged.push(nums2[j]);
+      j++;
+    }
+  }
+
+  while (i < nums1.length) {
+    merged.push(nums1[i]);
+    i++;
+  }
+
+  while (j < nums2.length) {
+    merged.push(nums2[j]);
+    j++;
+  }
+
+  return merged;
+}
+#################################################################################
+#################################################################################
+Question 7
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+Answer 7
+function intersection(nums1, nums2) {
+  let intersection = [];
+  let i = 0;
+  let j = 0;
+  while (i < nums1.length && j < nums2.length) {
+    if (nums1[i] === nums2[j]) {
+      intersection.push(nums1[i]);
+      i++;
+      j++;
+    } else if (nums1[i] < nums2[j]) {
+      i++;
+    } else {
+      j++;
+    }
+  }
+
+  return intersection;
+}
+#################################################################################
+#################################################################################
+Question 8
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+
+Answer 8
+function intersection(nums1, nums2) {
+  let intersection = [];
+  let i = 0;
+  let j = 0;
+  while (i < nums1.length && j < nums2.length) {
+    if (nums1[i] === nums2[j]) {
+      intersection.push(nums1[i]);
+      i++;
+      j++;
+    } else if (nums1[i] < nums2[j]) {
+      i++;
+    } else {
+      j++;
+    }
+  }
+
+  return intersection;
+}
+#################################################################################

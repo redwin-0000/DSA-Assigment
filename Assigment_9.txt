@@ -1,0 +1,192 @@
+Question;1
+
+Given an integer `n`, return *`true` if it is a power of two. Otherwise, return `false`*.
+
+An integer `n` is a power of two, if there exists an integer `x` such that `n == 2x`.
+
+
+////////////
+Answer
+
+function isPowerOfTwo(n) {
+  if (n <= 0) {
+    return false;
+  }
+
+  return (n & (n - 1)) === 0;
+}
+
+// Test cases
+console.log(isPowerOfTwo(1)); // true
+console.log(isPowerOfTwo(16)); // true
+console.log(isPowerOfTwo(3)); // false
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+Question;2
+
+Given a number n, find the sum of the first natural numbers.
+
+
+////////////
+Answer
+
+function sumOfNaturalNumbers(n) {
+  return (n * (n + 1)) / 2;
+}
+
+// Test cases
+console.log(sumOfNaturalNumbers(3)); // 6
+console.log(sumOfNaturalNumbers(5)); // 15
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question;3
+
+Given a positive integer, N. Find the factorial of N. 
+
+////////////
+Answer
+
+function factorial(N) {
+  if (N === 0 || N === 1) {
+    return 1;
+  } else {
+    return N * factorial(N - 1);
+  }
+}
+
+// Example usage:
+console.log(factorial(5)); // Output: 120
+console.log(factorial(4)); // Output: 24
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question;4
+Given a number N and a power P, the task is to find the exponent of this number raised to the given power, i.e. N^P.
+
+
+////////////
+Answer
+
+function exponentiation(N, P) {
+  return Math.pow(N, P);
+}
+
+// Example usage:
+console.log(exponentiation(5, 2)); // Output: 25
+console.log(exponentiation(2, 5)); // Output: 32
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question;5
+
+Given an array of integers arr, the task is to find maximum element of that array using recursion.
+
+
+////////////
+Answer
+
+function findMax(arr) {
+  if (arr.length === 1) {
+    return arr[0];
+  } else {
+    var max = findMax(arr.slice(1));
+    return arr[0] > max ? arr[0] : max;
+  }
+}
+
+// Example usage:
+console.log(findMax([1, 4, 3, -5, -4, 8, 6])); // Output: 8
+console.log(findMax([1, 4, 45, 6, 10, -8])); // Output: 45
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question;6
+Given first term (a), common difference (d) and a integer N of the Arithmetic Progression series, the task is to find Nth term of the series.
+
+////////////
+Answer
+function nthTerm(a, d, N) {
+  return a + (N - 1) * d;
+}
+
+// Example usage:
+console.log(nthTerm(2, 1, 5)); // Output: 6
+console.log(nthTerm(5, 2, 10)); // Output: 23
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Question;7
+
+Given a string S, the task is to write a program to print all permutations of a given string.
+
+////////////
+Answer
+
+function permute(S) {
+  var result = [];
+
+  function backtrack(str, arr) {
+    if (str.length === S.length) {
+      result.push(str);
+      return;
+    }
+
+    for (var i = 0; i < arr.length; i++) {
+      var char = arr[i];
+      if (str.indexOf(char) === -1) {
+        backtrack(str + char, arr);
+      }
+    }
+  }
+
+  backtrack('', S.split(''));
+  return result;
+}
+
+// Example usage:
+console.log(permute('ABC')); // Output: ["ABC", "ACB", "BAC", "BCA", "CBA", "CAB"]
+console.log(permute('XY')); // Output: ["XY", "YX"]
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Question;8
+Given a string S, the task is to write a program to print all permutations of a given string.
+
+////////////
+Answer
+
+function productOfArray(arr) {
+  var product = 1;
+  for (var i = 0; i < arr.length; i++) {
+    product *= arr[i];
+  }
+  return product;
+}
+
+// Example usage:
+console.log(productOfArray([1, 2, 3, 4, 5])); // Output: 120
+console.log(productOfArray([1, 6, 3])); // Output: 18
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+

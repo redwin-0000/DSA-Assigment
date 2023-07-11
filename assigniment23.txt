@@ -1,0 +1,134 @@
+#################################################################################
+Question 1
+
+
+
+Given preorder of a binary tree, calculate its **[depth(or height)](https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/)** [starting from depth 0]. The preorder is given as a string with two possible characters.
+
+1. ‘l’ denotes the leaf
+2. ‘n’ denotes internal node
+
+The given tree can be seen as a full binary tree where every node has 0 or two children. The two children of a node can ‘n’ or ‘l’ or mix of both.
+
+**Examples :**
+
+Input  : nlnll
+Output : 2
+
+Answer 1
+function findDepth(preorder) {
+  const stack = [];
+  let depth = 0;
+
+  for (const c of preorder) {
+    if (c === "n") {
+      depth++;
+    } else {
+      stack.push(depth);
+    }
+  }
+
+  return Math.max(...stack);
+}
+
+#################################################################################
+#################################################################################
+Question 2
+Given a Binary tree, the task is to print the left view of the Binary Tree. The left view of a Binary Tree is a set of leftmost nodes for every level.
+Answer 2
+function printLeftView(root) {
+  const queue = [];
+  queue.push(root);
+
+  while (queue.length) {
+    const node = queue.shift();
+
+    if (node.left) {
+      queue.push(node.left);
+    }
+
+    if (!queue.length || node.right) {
+      console.log(node.val);
+    }
+
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+}
+#################################################################################
+#################################################################################
+Question 3
+Given a Binary Tree, print the Right view of it.
+
+The right view of a Binary Tree is a set of nodes visible when the tree is visited from the Right side.
+
+Answer 3
+function printRightView(root) {
+  const queue = [];
+  queue.push(root);
+  let lastPrintedNode = root;
+
+  while (queue.length) {
+    const node = queue.shift();
+
+    if (node.right) {
+      queue.push(node.right);
+    }
+
+    if (!queue.length || node.left) {
+      if (node !== lastPrintedNode) {
+        console.log(node.val);
+        lastPrintedNode = node;
+      }
+    }
+
+    if (node.left) {
+      queue.push(node.left);
+    }
+  }
+}
+
+#################################################################################
+#################################################################################
+Question 4
+Given a Binary Tree, The task is to print the bottom view from left to right. A node x is there in output if x is the bottommost node at its horizontal distance. The horizontal distance of the left child of a node x is equal to a horizontal distance of x minus 1, and that of a right child is the horizontal distance of x plus 1.
+
+Answer 4
+function printBottomView(root) {
+  const queue = [];
+  const hdMap = new Map();
+
+  queue.push({
+    node: root,
+    hd: 0,
+  });
+
+  while (queue.length) {
+    const node = queue.shift();
+    const hd = node.hd;
+
+    if (!hdMap.has(hd)) {
+      hdMap.set(hd, node.node.val);
+    }
+
+    if (node.node.left) {
+      queue.push({
+        node: node.node.left,
+        hd: hd - 1,
+      });
+    }
+
+    if (node.node.right) {
+      queue.push({
+        node: node.node.right,
+        hd: hd + 1,
+      });
+    }
+  }
+
+  for (const [hd, val] of hdMap) {
+    console.log(val);
+  }
+}
+#################################################################################

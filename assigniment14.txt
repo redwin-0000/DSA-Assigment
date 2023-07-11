@@ -1,0 +1,339 @@
+#################################################################################
+Question 1
+
+Given a linked list of N nodes such that it may contain a loop.
+A loop here means that the last node of the link list is connected to the node at position X(1-based index). If the link list does not have any loop, X=0.
+Remove the loop from the linked list, if it is present, i.e. unlink the last node which is forming the loop.
+
+
+Answer 1
+
+function removeLoop(head) {
+  let slowPtr = head;
+  let fastPtr = head;
+
+  
+  while (fastPtr !== null && fastPtr.next !== null) {
+    slowPtr = slowPtr.next;
+    fastPtr = fastPtr.next.next;
+
+    // If the pointers meet, a loop is present
+    if (slowPtr === fastPtr) {
+      break;
+    }
+  }
+
+
+  if (slowPtr === fastPtr) {
+    slowPtr = head;
+    while (slowPtr.next !== fastPtr.next) {
+      slowPtr = slowPtr.next;
+      fastPtr = fastPtr.next;
+    }
+
+
+    fastPtr.next = null;
+  }
+}
+
+
+#################################################################################
+
+#################################################################################
+
+💡 **Question 2**
+
+A number **N** is represented in Linked List such that each digit corresponds to a node in linked list. You need to add 1 to it.
+
+Answer 2
+
+function addOne(head) {
+  let curr = head;
+  let carry = 1;
+
+
+  while (curr !== null) {
+    let sum = curr.data + carry;
+    carry = Math.floor(sum / 10);
+    curr.data = sum % 10;
+    curr = curr.next;
+  }
+
+
+  if (carry > 0) {
+    let newNode = new Node(carry);
+    newNode.next = head;
+    head = newNode;
+  }
+
+  return head;
+}
+
+#################################################################################
+#################################################################################
+💡 **Question 3**
+
+Given a Linked List of size N, where every node represents a sub-linked-list and contains two pointers:(i) a **next** pointer to the next node,(ii) a **bottom** pointer to a linked list where this node is head.Each of the sub-linked-list is in sorted order.Flatten the Link List such that all the nodes appear in a single level while maintaining the sorted order. **Note:** The flattened list will be printed using the bottom pointer instead of next pointer.
+
+Answer
+
+function flattenLinkedList(head) {
+  if (head === null || head.next === null) {
+    return head;
+  }
+
+  function merge(a, b) {
+    if (a === null) {
+      return b;
+    }
+    if (b === null) {
+      return a;
+    }
+
+    let result;
+    if (a.data < b.data) {
+      result = a;
+      result.bottom = merge(a.bottom, b);
+    } else {
+      result = b;
+      result.bottom = merge(a, b.bottom);
+    }
+
+    return result;
+  }
+
+  function flatten(root) {
+    if (root === null || root.next === null) {
+      return root;
+    }
+
+    root.next = flatten(root.next);
+
+    root = merge(root, root.next);
+
+    return root;
+  }
+
+  head = flatten(head);
+  return head;
+}
+
+#################################################################################
+#################################################################################
+
+💡 **Question 4**
+
+You are given a special linked list with **N** nodes where each node has a next pointer pointing to its next node. You are also given **M** random pointers, where you will be given **M** number of pairs denoting two nodes **a** and **b**  **i.e. a->arb = b** (arb is pointer to random node)**.**
+
+Construct a copy of the given list. The copy should consist of exactly **N** new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+
+For example, if there are two nodes **X** and **Y** in the original list, where **X.arb** **-->** **Y**, then for the corresponding two nodes **x** and **y** in the copied list, **x.arb --> y.**
+
+Return the head of the copied linked list.
+
+
+
+Answer
+
+function copyRandomList(head) {
+  if (head === null) {
+    return null;
+  }
+
+  let curr = head;
+
+  while (curr !== null) {
+    let newNode = new Node(curr.val);
+    newNode.next = curr.next;
+    curr.next = newNode;
+    curr = newNode.next;
+  }
+
+  curr = head;
+
+  while (curr !== null) {
+    if (curr.random !== null) {
+      curr.next.random = curr.random.next;
+    }
+    curr = curr.next.next;
+  }
+
+  curr = head;
+  let newHead = head.next;
+  let newCurr = newHead;
+
+  while (curr !== null) {
+    curr.next = curr.next.next;
+    if (newCurr.next !== null) {
+      newCurr.next = newCurr.next.next;
+    }
+    curr = curr.next;
+    newCurr = newCurr.next;
+  }
+
+  return newHead;
+}
+
+
+#################################################################################
+#################################################################################
+💡 **Question 5**
+
+Given the `head` of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return *the reordered list*.
+
+The **first** node is considered **odd**, and the **second** node is **even**, and so on.
+
+Note that the relative order inside both the even and odd groups should remain as it was in the input.
+
+You must solve the problem in `O(1)` extra space complexity and `O(n)` time complexity.
+
+Answer
+
+
+function oddEvenList(head) {
+  if (head === null || head.next === null) {
+    return head;
+  }
+
+  let odd = head;
+  let even = head.next;
+  let evenHead = even;
+
+  while (even !== null && even.next !== null) {
+    odd.next = even.next;
+    odd = odd.next;
+    even.next = odd.next;
+    even = even.next;
+  }
+
+  odd.next = evenHead;
+  return head;
+}
+
+#################################################################################
+#################################################################################
+
+💡 **Question 6**
+
+Given a singly linked list of size **N**. The task is to **left-shift** the linked list by **k** nodes, where **k** is a given positive integer smaller than or equal to length of the linked list.
+
+Answer
+
+function leftShiftLinkedList(head, k) {
+  if (head === null || k === 0) {
+    return head;
+  }
+
+  let curr = head;
+  let count = 1;
+
+  while (count < k && curr !== null) {
+    curr = curr.next;
+    count++;
+  }
+
+  if (curr === null) {
+    return head;
+  }
+
+  let kthNode = curr;
+
+  while (curr.next !== null) {
+    curr = curr.next;
+  }
+
+  curr.next = head;
+  head = kthNode.next;
+  kthNode.next = null;
+
+  return head;
+}
+
+#################################################################################
+#################################################################################
+
+💡 **Question 7**
+
+You are given the `head` of a linked list with `n` nodes.
+
+For each node in the list, find the value of the **next greater node**. That is, for each node, find the value of the first node that is next to it and has a **strictly larger** value than it.
+
+Return an integer array `answer` where `answer[i]` is the value of the next greater node of the `ith` node (**1-indexed**). If the `ith` node does not have a next greater node, set `answer[i] = 0`
+
+Answer
+
+function nextLargerNodes(head) {
+  let values = [];
+  let stack = [];
+  let curr = head;
+
+  while (curr !== null) {
+    values.push(curr.val);
+    curr = curr.next;
+  }
+
+  let result = new Array(values.length).fill(0);
+
+  for (let i = 0; i < values.length; i++) {
+    while (stack.length > 0 && values[i] > values[stack[stack.length - 1]]) {
+      result[stack.pop()] = values[i];
+    }
+    stack.push(i);
+  }
+
+  return result;
+}
+
+
+
+#################################################################################
+#################################################################################
+
+💡 **Question 8**
+
+Given the `head` of a linked list, we repeatedly delete consecutive sequences of nodes that sum to `0` until there are no such sequences.
+
+After doing so, return the head of the final linked list.  You may return any such answer.
+
+(Note that in the examples below, all sequences are serializations of `ListNode` objects.)
+
+Answer
+
+function removeZeroSumSublists(head) {
+  let dummy = new ListNode(0);
+  dummy.next = head;
+
+  let prefixSum = 0;
+  let prefixSumMap = new Map();
+  prefixSumMap.set(0, dummy);
+
+  let curr = head;
+
+  while (curr !== null) {
+    prefixSum += curr.val;
+
+    if (prefixSumMap.has(prefixSum)) {
+      let prev = prefixSumMap.get(prefixSum);
+      let start = prev.next;
+      let sum = prefixSum;
+
+      while (start !== curr) {
+        sum += start.val;
+        prefixSumMap.delete(sum);
+        start = start.next;
+      }
+
+      prev.next = curr.next;
+    } else {
+      prefixSumMap.set(prefixSum, curr);
+    }
+
+    curr = curr.next;
+  }
+
+  return dummy.next;
+}
+
+
+
+#################################################################################

@@ -1,0 +1,261 @@
+#################################################################################
+Question 1
+Given an array, for each element find the value of the nearest element to the right which is having a frequency greater than that of the current element. If there does not exist an answer for a position, then make the value ‘-1’.
+
+Answer 1
+function findNextGreaterFrequency(arr) {
+  const frequencyMap = new Map();
+  const result = new Array(arr.length).fill(-1);
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (!frequencyMap.has(arr[i])) {
+      frequencyMap.set(arr[i], 0);
+    }
+    frequencyMap.set(arr[i], frequencyMap.get(arr[i]) + 1);
+
+    let minIndex = -1;
+    let minFrequency = arr.length;
+
+    for (let j = i + 1; j < arr.length; j++) {
+      if (frequencyMap.get(arr[j]) > frequencyMap.get(arr[i]) && frequencyMap.get(arr[j]) < minFrequency) {
+        minIndex = j;
+        minFrequency = frequencyMap.get(arr[j]);
+      }
+    }
+
+    if (minIndex !== -1) {
+      result[i] = arr[minIndex];
+    }
+  }
+
+  return result;
+}
+
+
+#################################################################################
+#################################################################################
+Question 2
+Given a stack of integers, sort it in ascending order using another temporary stack.
+
+Answer 2
+
+function sortStack(stack) {
+  const tempStack = [];
+
+  while (stack.length > 0) {
+    const temp = stack.pop();
+
+    while (tempStack.length > 0 && tempStack[tempStack.length - 1] > temp) {
+      stack.push(tempStack.pop());
+    }
+
+    tempStack.push(temp);
+  }
+
+  return tempStack;
+}
+
+
+#################################################################################
+#################################################################################
+Question 3
+
+Given a stack with **push()**, **pop()**, and **empty()** operations, The task is to delete the **middle** element ****of it without using any additional data structure.
+
+Input  : Stack[] = [1, 2, 3, 4, 5]
+
+Output : Stack[] = [1, 2, 4, 5]
+
+Input  : Stack[] = [1, 2, 3, 4, 5, 6]
+
+Output : Stack[] = [1, 2, 4, 5, 6]
+
+Answer 3
+
+function deleteMiddle(stack) {
+  if (stack.length === 0) {
+    return stack;
+  }
+
+  const midIndex = Math.floor(stack.length / 2);
+  deleteMiddleHelper(stack, midIndex);
+
+  return stack;
+}
+
+function deleteMiddleHelper(stack, k) {
+  if (k === 0) {
+    stack.pop();
+    return;
+  }
+
+  const temp = stack.pop();
+  deleteMiddleHelper(stack, k - 1);
+  stack.push(temp);
+}
+
+
+#################################################################################
+#################################################################################
+Question 4
+
+Given a Queue consisting of first **n** natural numbers (in random order). The task is to check whether the given Queue elements can be arranged in increasing order in another Queue using a stack. The operation allowed are:
+
+1. Push and pop elements from the stack
+2. Pop (Or Dequeue) from the given Queue.
+3. Push (Or Enqueue) in the another Queue.
+
+Answer 4
+
+function checkQueueOrder(queue) {
+  const stack = [];
+  const sortedQueue = [];
+
+  let expected = 1;
+
+  while (queue.length > 0) {
+    if (queue[0] === expected) {
+      sortedQueue.push(queue.shift());
+      expected++;
+    } else if (stack.length > 0 && stack[stack.length - 1] === expected) {
+      sortedQueue.push(stack.pop());
+      expected++;
+    } else {
+      stack.push(queue.shift());
+    }
+  }
+
+  while (stack.length > 0 && stack[stack.length - 1] === expected) {
+    sortedQueue.push(stack.pop());
+    expected++;
+  }
+
+  return queue.length === 0 && stack.length === 0;
+}
+
+
+#################################################################################
+#################################################################################
+Question 5
+give answer in javascript without explanation and without comment 
+
+Answer 5
+
+function reverseNumber(number) {
+  const stack = [];
+  const sign = Math.sign(number);
+  number = Math.abs(number);
+
+  while (number > 0) {
+    stack.push(number % 10);
+    number = Math.floor(number / 10);
+  }
+
+  let reversedNumber = 0;
+  let multiplier = 1;
+
+  while (stack.length > 0) {
+    reversedNumber += stack.pop() * multiplier;
+    multiplier *= 10;
+  }
+
+  return reversedNumber * sign;
+}
+#################################################################################
+#################################################################################
+Question 6
+Given an integer k and a **[queue](https://www.geeksforgeeks.org/queue-data-structure/)** of integers, The task is to reverse the order of the first **k** elements of the queue, leaving the other elements in the same relative order.
+
+Only following standard operations are allowed on queue.
+
+- **enqueue(x) :** Add an item x to rear of queue
+- **dequeue() :** Remove an item from front of queue
+- **size() :** Returns number of elements in queue.
+- **front() :** Finds front item
+
+Answer 6
+
+function reverseFirstK(queue, k) {
+  if (k <= 0 || k > queue.length) {
+    return queue;
+  }
+
+  const stack = [];
+
+  for (let i = 0; i < k; i++) {
+    stack.push(queue.dequeue());
+  }
+
+  while (stack.length > 0) {
+    queue.enqueue(stack.pop());
+  }
+
+  for (let i = 0; i < queue.length - k; i++) {
+    queue.enqueue(queue.dequeue());
+  }
+
+  return queue;
+}
+
+#################################################################################
+#################################################################################
+Question 7
+Given a sequence of n strings, the task is to check if any two similar words come together and then destroy each other then print the number of words left in the sequence after this pairwise destruction
+
+Answer 7
+
+function countWordsLeft(sequence) {
+  const stack = [];
+
+  for (let i = 0; i < sequence.length; i++) {
+    const word = sequence[i];
+
+    if (stack.length > 0 && stack[stack.length - 1] === word) {
+      stack.pop();
+    } else {
+      stack.push(word);
+    }
+  }
+
+  return stack.length;
+}
+
+#################################################################################
+#################################################################################
+Question 8
+Given an array of integers, the task is to find the maximum absolute difference between the nearest left and the right smaller element of every element in the array.
+
+**Note:** If there is no smaller element on right side or left side of any element then we take zero as the smaller element. For example for the leftmost element, the nearest smaller element on the left side is considered as 0. Similarly, for rightmost elements, the smaller element on the right side is considered as 0.
+
+Answer 8
+function maxAbsDifference(arr) {
+  const leftSmaller = [];
+  const rightSmaller = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let j = i - 1;
+    while (j >= 0 && arr[j] >= arr[i]) {
+      j = leftSmaller[j];
+    }
+    leftSmaller[i] = j;
+  }
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+    let j = i + 1;
+    while (j < arr.length && arr[j] >= arr[i]) {
+      j = rightSmaller[j];
+    }
+    rightSmaller[i] = j;
+  }
+
+  let maxDiff = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    const diff = Math.abs(arr[leftSmaller[i]] - arr[rightSmaller[i]]);
+    maxDiff = Math.max(maxDiff, diff);
+  }
+
+  return maxDiff;
+}
+
+#################################################################################
