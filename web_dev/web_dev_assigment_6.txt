@@ -1,0 +1,313 @@
+Question_1
+
+What’s Constructor And Its Purpose?
+
+
+Answer:
+
+A constructor is a special function that creates and initializes an object instance of a class. In JavaScript, a constructor gets called when an object is created using the new keyword.
+
+The purpose of a constructor is to create a new object and set values for any existing object properties.
+
+
+example
+//Constructor
+function User() {
+this.name = 'Bob';
+}
+
+var user1 = new User();
+var user2 = new User();
+
+
+
+
+##################################################################################################################
+
+Question_2
+
+
+Explain This Keyword and Its Purpose?
+
+Answer:
+
+In JavaScript, the this keyword refers to an object.
+
+Which object depends on how this is being invoked (used or called).
+
+The this keyword refers to different objects depending on how it is used:
+
+example:
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+
+
+
+
+##################################################################################################################
+
+Question_3
+
+
+What’s Call Apply Bind Method & Difference Between them
+
+Answer:
+
+The call, apply, and bind methods are used in JavaScript to control the invocation of functions and set the context (the value of this) within the function body. While they serve similar purposes, they differ in how arguments are passed and how they handle function invocation.
+
+call: The call method is used to invoke a function and explicitly specify the value of this for that function. It accepts the value of this as its first argument, followed by the arguments to be passed to the function.
+
+
+function sayHello() {
+  console.log('Hello, ' + this.name);
+}
+
+const person = { name: 'John' };
+
+sayHello.call(person); // Output: Hello, John
+
+
+
+apply: The apply method is similar to call, but it accepts arguments as an array or an array-like object instead of individual arguments.
+
+function greet(greeting) {
+  console.log(greeting + ', ' + this.name);
+}
+
+const person = { name: 'Jane' };
+
+greet.apply(person, ['Good morning']); // Output: Good morning, Jane
+
+
+bind: The bind method is used to create a new function that, when invoked, has a specified value for this and potentially pre-set arguments. It returns a new function, allowing you to store and call it later.
+
+function introduce() {
+  console.log('I am ' + this.name + ' and I am a ' + this.role);
+}
+
+const person = { name: 'Alice', role: 'developer' };
+
+const boundFunction = introduce.bind(person);
+boundFunction(); // Output: I am Alice and I am a developer
+
+
+call and apply immediately invoke the function, while bind returns a new function.
+call accepts individual arguments, apply accepts an array-like object, and bind can pre-set arguments but accepts them normally when invoked.
+call and bind are similar, except bind allows you to create a new function with a permanently bound this value.
+
+
+##################################################################################################################
+
+Question_4
+
+Explain OOPS ? 
+
+
+Answer:
+
+Object-oriented programming is a core of Java Programming, which is used for designing a program using classes and objects
+
+
+
+
+
+
+
+##################################################################################################################
+
+Question_5
+
+
+Whats Abstraction and Its Purpose?
+
+Answer:
+
+
+Abstraction is a fundamental concept in object-oriented programming (OOP) that allows you to create simplified models of complex systems. It involves hiding unnecessary implementation details and exposing only the essential features and behavior of an object or a system.
+
+The purpose of abstraction is to provide a simplified and more manageable representation of real-world objects or systems. It allows developers to focus on the essential aspects of an object or system while ignoring the implementation details that are not relevant to the current context.
+
+
+Here are some key points about abstraction and its purpose:
+
+Simplification: Abstraction simplifies complex systems by breaking them down into smaller, more manageable parts. It allows you to focus on the high-level concepts and ignore the low-level implementation details.
+
+Data Hiding: Abstraction involves hiding the internal details and complexities of an object or system. By exposing only the necessary interfaces or methods, you can control access to the underlying data and protect it from unauthorized modifications.
+
+Reusability: Abstraction promotes code reuse. By creating abstract classes or interfaces, you can define common behaviors and characteristics that can be inherited or implemented by multiple objects or classes.
+
+Modularity: Abstraction helps in creating modular and maintainable code. It allows you to separate the concerns and responsibilities of different components, making the codebase more organized and easier to understand.
+
+Flexibility: Abstraction provides flexibility by allowing you to change the implementation details of an object or system without affecting the code that uses it. As long as the exposed interface remains the same, you can modify the underlying implementation without impacting the client code.
+
+
+
+##################################################################################################################
+
+Question_6
+
+Whats Polymorphism and Purpose of it?
+
+
+Answer:
+Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different classes to be treated as objects of a common superclass. It enables you to write code that can work with objects of multiple types, providing flexibility and extensibility to your programs.
+
+The purpose of polymorphism is to allow objects to be used interchangeably by relying on their shared interface or superclass. It enables you to write code that is more generic and reusable, as it can operate on objects of different specific types without needing to know their exact class.
+
+Here are some key points about polymorphism and its purpose:
+
+Code Reusability: Polymorphism promotes code reuse by allowing you to write generic code that can operate on objects of multiple types. You can define behaviors in a superclass or interface and have different implementations in the subclasses, making it easier to extend and modify the system.
+
+Flexibility and Extensibility: Polymorphism provides flexibility by allowing you to add new classes that conform to the shared interface without modifying existing code. This makes it easier to introduce new functionality or variations to your program.
+
+Method Overriding: Polymorphism allows subclasses to override methods defined in the superclass or interface, providing specialized implementations. This enables you to have different behaviors for specific types while still treating them as objects of the common superclass.
+
+Dynamic Binding: Polymorphism involves dynamic binding, where the appropriate method implementation is determined at runtime based on the actual type of the object. This allows for late binding and flexibility in method invocation.
+
+Code Modularity: Polymorphism helps in creating modular code by separating the behavior of objects from their specific types. It promotes loose coupling, as objects interact based on their shared interface rather than their concrete classes.
+
+By leveraging polymorphism, you can write more flexible and maintainable code that can handle a wider range of objects and types. It allows for code reuse, extensibility, and modular design, making your programs more adaptable to changing requirements and facilitating easier maintenance.
+
+
+
+
+
+
+
+
+##################################################################################################################
+
+Question_7
+
+
+ Whats Inheritance and Purpose of it?
+
+Answer:
+
+
+Inheritance is a fundamental concept in object-oriented programming (OOP) that allows you to create new classes based on existing classes. It enables the creation of a hierarchy of classes where derived classes inherit attributes and behaviors from a base class, known as the superclass or parent class.
+
+The purpose of inheritance is to promote code reuse, create relationships between classes, and facilitate a hierarchical organization of code. It allows you to define common characteristics and behaviors in a superclass and extend or modify them in subclasses, leading to more efficient and modular code development.
+
+Here are some key points about inheritance and its purpose:
+
+Code Reusability: Inheritance promotes code reuse by allowing subclasses to inherit attributes and behaviors from a superclass. Common functionality can be defined once in the superclass and reused by multiple subclasses, eliminating the need for redundant code.
+
+Hierarchy and Relationships: Inheritance establishes a hierarchical relationship between classes, where subclasses are more specific versions of the superclass. This hierarchy allows you to model real-world relationships, such as an "Animal" superclass with subclasses like "Dog" and "Cat."
+
+Extensibility: Inheritance provides a mechanism for extending existing classes. Subclasses can add new attributes and behaviors or modify existing ones inherited from the superclass. This enables you to create specialized classes that inherit common functionality while introducing specific features.
+
+Method Overriding: Inheritance allows subclasses to override methods defined in the superclass. This enables you to provide different implementations of methods in the subclasses, tailored to their specific needs. Method overriding is a key feature of polymorphism, as it allows objects of different types to exhibit different behaviors while still being treated as instances of the superclass.
+
+Code Organization and Maintainability: Inheritance facilitates code organization by grouping related classes into a hierarchy. This hierarchical structure makes the codebase more modular, easier to understand, and maintain. Changes made to the superclass can propagate to all its subclasses, promoting code consistency and reducing the risk of errors.
+
+By utilizing inheritance, you can create a well-structured and modular codebase. It promotes code reuse, extensibility, and code organization, making it easier to maintain and enhance your software system over time.
+
+
+
+
+
+
+##################################################################################################################
+
+Question_8
+
+Whats Encapsulation and Purpose of it ?
+
+Answer:
+
+Encapsulation is a fundamental concept in object-oriented programming (OOP) that combines data and the methods (or functions) that operate on that data into a single unit called an object. It involves bundling the data and the related methods together, while hiding the internal details and providing controlled access to the data through public interfaces.
+
+The purpose of encapsulation is to provide data protection, promote code maintainability, and establish a clear separation between implementation and usage. It allows you to enforce controlled access to the internal state of an object, ensuring that it is accessed and modified only through well-defined methods.
+
+Here are some key points about encapsulation and its purpose:
+
+Data Protection: Encapsulation protects the internal state (data) of an object from being directly accessed or modified by external entities. The data is typically declared as private or protected, preventing unauthorized access and ensuring data integrity.
+
+Abstraction of Implementation: Encapsulation allows you to hide the internal implementation details of an object. The object exposes a public interface (public methods) that other parts of the code can interact with, while keeping the internal workings hidden. This abstraction shields the users of the object from unnecessary complexity and implementation changes.
+
+Code Maintainability: Encapsulation promotes code maintainability by encapsulating related data and behavior within an object. It provides a clear boundary between the internal implementation and external usage, allowing you to modify the internal implementation without affecting the code that uses the object. This reduces the impact of changes and simplifies maintenance.
+
+Information Hiding: Encapsulation enables information hiding by controlling the visibility of data and methods. Only the public interface is accessible to external entities, while the internal details remain hidden. This protects the object's internal state and ensures that changes to the implementation do not impact the external code that relies on the object.
+
+Code Organization: Encapsulation helps in organizing code by grouping related data and behavior into cohesive objects. It promotes a modular and structured approach to programming, making the codebase easier to understand, maintain, and extend.
+
+
+
+
+
+
+
+##################################################################################################################
+
+Question_9
+
+Explain Class in JavaScript?
+
+Answer:
+
+
+Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JS are built on prototypes but also have some syntax and semantics that are unique to classes.
+
+// Declaration
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+
+// Expression; the class is anonymous but assigned to a variable
+const Rectangle = class {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+
+// Expression; the class has its own name
+const Rectangle = class Rectangle2 {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+};
+
+
+
+
+##################################################################################################################
+
+Question_10
+
+ What’s Super Keyword & What it does?
+
+
+Answer:
+The super keyword is used in object-oriented programming languages, such as JavaScript, to refer to the parent class or superclass. It is typically used within a subclass to access and call methods or constructors defined in the superclass.
+
+Here's a brief explanation of the super keyword and its purpose:
+
+Accessing Superclass Members: The super keyword allows you to access and invoke methods, properties, or constructors of the superclass from within a subclass. It provides a way to extend and customize the behavior of the superclass while retaining its functionality.
+
+Method Overriding: In the context of method overriding, the super keyword is used to invoke the overridden method of the superclass. It enables the subclass to augment or modify the behavior of the superclass's method without completely replacing it.
+
+Constructor Chaining: The super keyword is also used to invoke the constructor of the superclass from within the constructor of the subclass. This helps initialize the inherited properties or perform additional setup specific to the subclass, while ensuring that the superclass's initialization logic is executed.
+
+Passing Arguments: When calling a superclass constructor using super, you can also pass arguments to it. This allows you to provide specific values or additional parameters required by the superclass constructor.
+
+
+
+
+
+
+
+
+##################################################################################################################
