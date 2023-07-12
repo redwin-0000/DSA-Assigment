@@ -1,0 +1,70 @@
+Question_1
+
+What is a Media Query in CSS, and what is its purpose?
+
+Answer:
+
+allow you to create different layouts depending on the size of the viewport, but they can also be used to detect other things about the environment your site is running on
+
+
+#################################################################################################################
+
+Question_2
+
+ How do you define a media query in CSS?
+
+Answer
+
+A media query consists of a media type and can contain one or more expressions, which resolve to either true or false.
+
+@media not|only mediatype and (expressions) {
+  CSS-Code;
+}
+
+################################################################################################################
+
+Question_3
+
+ Explain the concept of Breakpoints in Responsive Web Design and How They are used in Media Queries.
+
+Answer
+
+media query breakpoints are pixel values that a developer/designer can define in CSS. When a responsive website reaches those pixel values, a transformation (such as the one detailed above) occurs so that the website offers an optimal user experience.
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {...}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {...}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+
+################################################################################################################
+
+Question_4
+ What is the purpose of using Media Queries for Print Media?
+
+Answer
+
+Media queries to specify which CSS to use for paged media (aka printing).
+CSS to turn off the display of content that is not appropriate for the printed page, such as as navigation bar or page header.
+
+#################################################################################################################
+
+Question_5
+
+What is the purpose of the orientation media feature?
+
+Answer
+CSS provides the orientation media feature to allow adjusting layout based on screen orientation.
+
+The Screen Orientation API provides a programmatic JavaScript API for working with screen orientation — including the ability to lock the viewport to a specific orientation.
+
+
+##############################################################################################################
+
+
+
