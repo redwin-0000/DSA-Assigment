@@ -1,0 +1,125 @@
+Question_1
+<!DOCTYPE html> is it a tag of html? If not, what is it and why do we use it?
+
+
+Answer
+
+All HTML documents must start with a <!DOCTYPE> declaration.
+
+The declaration is not an HTML tag. It is an "information" to the browser about what document type to expect.
+
+
+#########################################################################################################################
+
+Question_2
+ Explain Semantic tags in html? And why do we need it?
+
+
+Answer
+
+syntax that makes the HTML more comprehensible by better defining the different sections and layout of web pages.
+t makes web pages more informative and adaptable, allowing browsers and search engines to better interpret content.
+
+
+#########################################################################################################################
+
+Question_3
+
+Differentiate between HTML Tags and Elements?
+
+Answer
+
+HTML Tags are building blocks of HTML Page. HTML Elements are components that are used in HTML Page. HTML Tags usually exist in pairs consisting of a starting and an ending tag. However, some tags do not have a closing tag.
+
+
+#########################################################################################################################
+
+Question_4
+Build Your Resume using HTML only
+
+
+Answer
+GitHub link of Resume Using HTML :
+
+https://github.com/redwin-0000/Placement_Assignment_Ashutosh_Singh/blob/master/html/Resume.html
+
+
+
+#########################################################################################################################
+
+Question_5
+
+Write HTML code so that it looks like the below image
+
+Answer
+Answer number 5 github link:
+
+https://github.com/redwin-0000/Placement_Assignment_Ashutosh_Singh/blob/master/html/question_5.html
+
+#####################################################################################################################
+
+Question_6
+What are some of the advantages of HTML5 over its previous versions?
+
+
+Answer
+
+  1. Cleaner Code Structure
+  2. Cross-Browser Compatibility
+  3. Audio and Video Tags
+  4. Offline Browsing
+  5. No More Cookies 
+  6. Canvas for Animation and Game Development
+
+
+
+#########################################################################################################################
+
+Question_7
+
+ Create a simple Music player using html only
+
+Answer
+
+Music player github link: 
+
+https://github.com/redwin-0000/Placement_Assignment_Ashutosh_Singh/blob/master/html/musicPlayer.html
+
+
+
+#######################################################################################################################
+Question_8
+
+What is the difference between <figure> tag and <img> tag?
+
+
+Answer
+
+The figure tag is used to semantically organize the content of images, videos, audios or even charts or tables, block of codes in the HTML document. The image tag is used to add an image to an HTML page. <img> tag can only insert image
+
+#########################################################################################################################
+Question_9
+
+What’s the difference between html tag and attribute and give example of some global attributes?
+
+
+Answer
+
+The main difference between tag and attribute is that a tag is a way of representing an HTML element in the program, while an attribute is a way of describing the characteristics of an HTML element. Every business organization maintains a website. It helps to inform the customers about their products and services.
+
+
+###################################################################################################################
+
+Question_10
+
+Write Html code so that it looks like the below image 
+
+Answer
+
+Answer number 10 github link:
+
+https://github.com/redwin-0000/Placement_Assignment_Ashutosh_Singh/blob/master/html/Table.html
+
+
+#######################################################################################################################
+
