@@ -129,7 +129,6 @@ In summary, conditional rendering in React can be achieved by using JavaScript's
 ##########################################################################################
 ##########################################################################################
 Q 10 Build Calculator Web app using React, See below image for reference
-Answer 10 https://github.com/mfaizk/Placement_Assignment_MOHD_FAIZ_KHAN/tree/
-master/React/question_13
+Answer 10
 ##########################################################################################
 ##########################################################################################
