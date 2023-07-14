@@ -153,10 +153,13 @@ Ways to avoid prop drilling:
     Component Composition: Utilize component composition and create more focused, reusable components that encapsulate specific functionality. This helps to keep the component tree shallow and avoids excessive prop drilling.
 ##########################################################################################
 Q.8 Create a Counter Web App using React
-Ans.8
+Ans.8 https://github.com/redwin-0000/
+Placement_Assignment_Ashutosh_Singh/tree/master/React/question_11
 ##########################################################################################
 
 Q.10   Develop a simple website using React, fetch and display products from the "https://fakestoreapi.com/products" API. The website should have the following features
 
 Ans.10
+
+https://github.com/redwin-0000/DSA-Assigment/tree/main/web_dev/Question-10
 ##########################################################################################

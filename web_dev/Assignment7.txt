@@ -1,11 +1,15 @@
 ##########################################################################################
 Q.2 Create an elegant and functional digital clock using HTML, CSS, and JavaScript, where the current time is displayed with precision and style as shown in the below image
 
+Ans.
+https://github.com/redwin-0000/DSA-Assigment/tree/main/web_dev/As-7-Question-2
 
 ##########################################################################################
 Q.4 Develop a simple website using HTML, CSS, and JavaScript to fetch and display products from the "https://fakestoreapi.com/products" API. The website should have the following features
 
-And.4
+Ans.4   
+https://github.com/redwin-0000/
+Placement_Assignment_Ashutosh_Singh/tree/master/React/question_11
 ##########################################################################################
 
 
@@ -17,7 +21,6 @@ Q.8,9,10 Create a Simple Todo Web App with following features :
 
 Ans.8,9,10 
 
-https://github.com/redwin-0000/
-Placement_Assignment_Ashutosh_Singh/tree/master/React/question_11
+https://github.com/redwin-0000/todofrontend-master
 
 ##########################################################################################
